@@ -178,7 +178,8 @@
       submitButton.textContent = 'Sending...';
 
       try {
-        const response = await fetch('/api/contact', {
+        const apiUrl = window.location.origin + '/api/contact';
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
