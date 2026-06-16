@@ -1,7 +1,31 @@
+# Dependencies
 node_modules/
+npm-debug.log
+yarn-error.log
+
+# Database
+data/contacts.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Reports
+*.xlsx
+*.pdf
+
+# Environment
 .env
-data/
+.env.local
+.env.*.local
