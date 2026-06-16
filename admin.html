@@ -202,8 +202,17 @@
     async function loadContacts() {
       try {
         const apiUrl = window.location.origin + '/api/contacts';
+        console.log('Fetching from:', apiUrl);
+        
         const response = await fetch(apiUrl);
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+        
         const contacts = await response.json();
+        console.log('Contacts loaded:', contacts.length);
 
         const loading = document.getElementById('loading');
         const table = document.getElementById('contactsTable');
@@ -211,7 +220,7 @@
         const tbody = document.getElementById('tbody');
         const stats = document.getElementById('stats');
 
-        if (contacts.length === 0) {
+        if (!contacts || contacts.length === 0) {
           loading.style.display = 'none';
           empty.style.display = 'block';
           table.style.display = 'none';
@@ -269,8 +278,9 @@
         empty.style.display = 'none';
         table.style.display = 'table';
       } catch (error) {
+        console.error('Error details:', error);
         const msg = document.getElementById('message');
-        msg.innerHTML = `<div class="error">Error loading contacts: ${error.message}</div>`;
+        msg.innerHTML = `<div class="error">Error loading contacts: ${error.message}<br><small>Check browser console (F12) for details</small></div>`;
         document.getElementById('loading').style.display = 'none';
       }
     }
